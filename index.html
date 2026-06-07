@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetVita — Histórico de Saúde dos Pets</title>
+
+<!-- ===== PWA: Manifest e meta tags ===== -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Cor da barra de status no Android (Chrome) -->
+<meta name="theme-color" content="#4e7352">
+
+<!-- iOS / Safari: comportamento de app instalado -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PetVita">
+
+<!-- Ícones para iOS (Apple não usa o manifest) -->
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAIX0lEQVR4nO2dvZLUOBRGb1OEU1M1L0ZASsQzEG5MyDMQbUrAi23V1uZssGswnnbblq50/86JoWVJ39GV3W7NTZzx7tP7H9bXAGP5/uXbzfoaFkwvhLDDgpUU0xsl9HDETBmmNUTw4SozRBjeAMGHXkaKMOyDCT5oM0IE9Q8k+DAaTRHeaH2QCOGHOWjmTMUkgg9W9FaD7gpA+MGS3vx1CUD4wQM9OWwWgPCDJ1rz2CQA4QePtOTysgCEHzxzNZ+XBCD8EIErOT39CInwt/H08tz9Gf/89bfCldTjzCPSUwIQ/sdohLwV5HjMkQSHAhD+11gG/giEeM0jCd7OvJCoeA78lu21IsRjHlaAyqt/pNCfpbIMe1VgV4CK4c8Y+j0qynBPArZAUiv4C0ufK4qw5m4FqLD6Vwz9ERVk2FaBchWA4O9TsSq8qgBZV3+Cf52sIqyrgOovwrxC+NuoMG6/VYBsq3+FCZxFtmqwVIGU9wAEX5+s9wc/t0BZVn/CP5Ys47vkPU0FyDIxEchUDVLcBBN+GzKM+00k9vYnwyREJ3IlCLsFIvh+iLwlCimAdfj//OPr4b/58PljmnbP8vTyHE6CcFsgy/CfCeAWjUBatdtKJAlCCWAV/pYAbmkJpFW7GkSR4Eb499EI4JYzgbRqV5sIErh/DPr08pwm/Gc+16rdEVjN3RVcCxB5y9Py+VbtjsazBG4FyBr+vXas2p2FVwlcCpA9/Nv2rNqdjUcJXAoAMAt3T4GqrP4e4BGpswrgsUSCPp7m2Y0A0b7hzYBlv71I4EIAL4MBc/Ew7+YCWA9C1dV/wbr/1vNvLgCAJaYCWNsPPrDMgZkAhB/WWOXBRADCD/ewyAX3AFCa6QKw+sMjZudjqgCEH84wMydsgaA00wTwuvpb/njcA177PysvIY9FuYf3I0OiUWU8p7wOPdJmrSNDrF8JsEBrHEaKMPrV6eEVYFT4ewK7/N8MK5gWXsdz9GFbwyuAtgAjjwyxqAIfPn80a1ckxhEsIwUYehMcIfwjP9c7UcZz5BY6zGPQGUeGzN4SLe1ZtJv1CJarDBNA09qZR4bMCuO2nZntRjyCZVQVcF8BLI4MGR3Gvc+f0W6VI1jO4l4AK0aF8ehzrdqtypCnQFrlynL1WAcmy+nQXsazB+0nQmm+CR5JzyPDnom3arcS6hUgw+q/sBeiiH8hxvN4XkWzClABGrBaXVnV9XF5E+xhtRLxcx29eOmHl+tYoyqA11eeIReaOXNZAQBmgQBQGjUB2P7ATLTyRgWA0iAAlAYBoDQqArD/Bws0cueyAnj5xtPLdfTipR9ermONSwEAZuFWAOvVwrp9baz7Y93+Ht0CsP8HS3rz57YCiPDWpTaM52tcCwAwGvcCWB1VkhXG83fcCyAy98iQCjCevwghgMicI0MqwXj+RxgBRDgyRBvGs/NH8ZaPQK2OKslK9PFs/aF8WAEWohwZwnWOpawAC57+osnIH3976oOH4C+UF8AayzP+oV0AzgXqxPKoD/7STT8I0IinM24QoR0EuIin4G9BhOuE+h7AGs/hXxPlOj1ABThBxEBRDc5BBTggYvjXRL/+0SDAA7KEJ0s/RoAAO2QLTbb+aIEAd8galqz96gEBNmQPSfb+XQUBVlQJR5V+ngEB/qdaKKr1dw8EgNJ0CaD9N1utqLoaZul3Tw6pAFCa8gJkWQVbqd7/8gJAbUoLUH31W6g8DqUFAEAAKE23AFEfhVYu+/eIOh69+aMCQGkQAEqDAFAaFQGi3gdAbDRyRwWA0iAAlAYBoDRqAnAfADPRyhsVAEpTVgBOTPudquOhKgDbIJiBZs7KVgAAkeICVC37WyqPg7oAbINgJNr5Kl0BRGqvfiL0f4gAVAEYwYhcla8AInVXwar9XoMAUJphAkTbBlVbDaP1d1SeqAArooWilSr9PMNQAaJVAZH84YjYv5E5ogLcIWJIzpC1Xz0MFyBiFRDJF5ao/RmdnykVAAlsidqPGblhC3RA1PAsRL/+0dzefXr/Y1ZjTy/Ps5oaQqTT06IHf9augQpwgSihinKdHphaAUTiV4EFj9UgS/Bn3jNOF0AkjwQiPkTIEnyR+Q9M3k5tLSFL+CxEyBR8K0wqgEiuKrBlpAyZQ2/xuNxMAJHcEmxpkSJz2LdYfVdkKoBILQngPpZflPIYFEpjLkDU1yRAB+v5NxdAxH4QwAYP8+5CABEfgwHz8DLfbgQQ8TMoMBZP8+xKABFfgwP6eJtfdwIAzMSlAN5WCdDB47y6FEDE52BBO17n060AIn4HDa7heR7dvw26DB6vTMTDc/AX3nz/8u1mfRFniDCY8Iso8+V6C7QlyqBWJ9I8hRJAJNbgViTa/IQTQCTeIFch4ry4vwneg5tjP0QM/sIbEZEoN8L3iDz4GYg8/t+/fLuF3AJtiTwJkckw7mG3QFvYEs0jQ/AXflaAyNugNZkmxyNZxnfJe5oKsIZqoE+W4G95tepbnxIxAkRoJ2Pw17udFDfBR2ScxBlUGLe7+/6MVWCBanBM5uBv73VT3gM8gvuDfTIHf4/dJz+Zq8CWyjJUCv29J53lKsA9KlaFSsF/xMNn/5WqwJaMMlQO/d73XIdfflWWYCGyDJVDv/DoS162QCfYhsizEAT+Gqdef6AKPMZSCAL/mKNXfE6//4MEbWjIQcjbOPN+26UX4JAAonD25c5Lr0JkeWMUcnMlp5ffBUIC8MzVfDa9DIcE4JGWXDa/DYoE4InWPHa9Do0E4IGeHHb/HgAJwJLe/KmGl8ekMAuthVf1F2FUA5iBZs6GBZZqANqMWGCHr9iIAL2M3FlM27IgAlxlxpZ6+p4dEeCImfeSpjetyAALVg9Q/gV4QJs5WqrFSgAAAABJRU5ErkJggg==">
+
+<!-- Evitar zoom indesejado no iOS ao focar inputs -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+/* ===== FONTES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ===== VARIÁVEIS ===== */
+:root {
+  --cream: #faf6f0;
+  --warm-white: #fffcf7;
+  --sage: #7a9e7e;
+  --sage-light: #a8c5ab;
+  --sage-dark: #4e7352;
+  --terracotta: #c4704a;
+  --terracotta-light: #e8a882;
+  --gold: #c9a84c;
+  --gold-light: #f0d898;
+  --charcoal: #2c2c2c;
+  --gray-mid: #7a7a7a;
+  --gray-light: #e8e2d9;
+  --gray-lighter: #f0ebe3;
+  --red: #c0392b;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream);
+  color: var(--charcoal);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: var(--font-body); border: none; }
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--gray-lighter); }
+::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 99px; }
+
+/* ===== LAYOUT PRINCIPAL ===== */
+#app { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* ===== HEADER ===== */
+#header {
+  background: var(--warm-white);
+  border-bottom: 2px solid var(--gray-light);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 64px;
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+.logo span { color: var(--terracotta); }
+.pet-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+#pet-select {
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 220px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+#pet-select:focus { border-color: var(--sage); }
+.header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+/* ===== BOTÕES ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--sage);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--sage-dark); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.btn-secondary {
+  background: var(--gray-lighter);
+  color: var(--charcoal);
+  border: 1.5px solid var(--gray-light);
+}
+.btn-secondary:hover { background: var(--gray-light); }
+.btn-accent {
+  background: var(--terracotta);
+  color: #fff;
+}
+.btn-accent:hover { background: #a85c3a; }
+.btn-gold {
+  background: var(--gold);
+  color: #fff;
+}
+.btn-gold:hover { background: #a88a30; }
+.btn-danger {
+  background: #f9eceb;
+  color: var(--red);
+  border: 1.5px solid #f0c9c5;
+}
+.btn-danger:hover { background: #f0c9c5; }
+.btn-sm { padding: 5px 11px; font-size: 0.82rem; }
+.btn-icon { padding: 8px; }
+
+/* ===== TABS DE NAVEGAÇÃO ===== */
+#nav-tabs {
+  background: var(--warm-white);
+  border-bottom: 2px solid var(--gray-light);
+  padding: 0 24px;
+}
+.nav-tabs-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+}
+.tab-btn {
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--gray-mid);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: var(--transition);
+}
+.tab-btn:hover { color: var(--sage-dark); }
+.tab-btn.active {
+  color: var(--sage-dark);
+  border-bottom-color: var(--sage);
+  font-weight: 600;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+#main {
+  flex: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+}
+
+/* ===== VIEWS ===== */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ===== TELA SEM PETS ===== */
+#empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+#empty-state .empty-icon { font-size: 4rem; margin-bottom: 16px; }
+#empty-state h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--sage-dark);
+  margin-bottom: 8px;
+}
+#empty-state p { color: var(--gray-mid); margin-bottom: 24px; }
+
+/* ===== RESUMO DO PET ===== */
+#pet-summary-card {
+  background: var(--warm-white);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--gray-light);
+  padding: 24px;
+  margin-bottom: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: var(--shadow-sm);
+}
+.pet-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--sage-light);
+  flex-shrink: 0;
+  background: var(--gray-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  overflow: hidden;
+}
+.pet-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pet-info-main { flex: 1; min-width: 0; }
+.pet-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.pet-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.pet-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.pet-tag-species { background: var(--sage-light); color: var(--sage-dark); }
+.pet-tag-breed { background: var(--gold-light); color: #7a5c10; }
+.pet-tag-age { background: #e8e4f8; color: #5040a0; }
+.pet-tag-weight { background: #fce8d5; color: #8c4a10; }
+.pet-conditions {
+  font-size: 0.88rem;
+  color: var(--terracotta);
+  font-weight: 500;
+}
+.pet-conditions::before { content: "⚕ "; }
+.pet-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ===== AVISO DE BACKUP ===== */
+#backup-warning {
+  background: #fef9e7;
+  border: 1.5px solid var(--gold-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  font-size: 0.84rem;
+  color: #7a5c10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===== FILTROS ===== */
+#filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+.filter-label { font-size: 0.75rem; font-weight: 600; color: var(--gray-mid); text-transform: uppercase; letter-spacing: 0.05em; }
+.filter-input {
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-size: 0.88rem;
+  transition: var(--transition);
+}
+.filter-input:focus { border-color: var(--sage); }
+.filter-reset { align-self: flex-end; }
+
+/* ===== LINHA DO TEMPO ===== */
+#timeline {
+  position: relative;
+}
+#timeline::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sage-light), var(--gray-light));
+  z-index: 0;
+}
+.timeline-item {
+  position: relative;
+  padding-left: 54px;
+  margin-bottom: 18px;
+}
+.timeline-dot {
+  position: absolute;
+  left: 12px;
+  top: 18px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid var(--warm-white);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+.timeline-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: default;
+}
+.timeline-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--sage-light);
+  transform: translateY(-1px);
+}
+.timeline-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.event-type-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.event-title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--charcoal);
+  flex: 1;
+}
+.event-date {
+  font-size: 0.82rem;
+  color: var(--gray-mid);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.event-body { font-size: 0.88rem; color: var(--gray-mid); margin-bottom: 10px; }
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--gray-mid);
+  margin-bottom: 10px;
+}
+.event-meta span::before { margin-right: 3px; }
+.event-diagnosis {
+  display: inline-block;
+  background: #fce8d5;
+  color: #8c4a10;
+  border-radius: 99px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.event-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.attachment-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: var(--cream);
+  border: 1.5px solid var(--gray-light);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  color: var(--sage-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.attachment-btn:hover { background: var(--sage-light); color: var(--sage-dark); border-color: var(--sage-light); }
+.event-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.timeline-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-mid);
+}
+.timeline-empty .icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+/* ===== CORES POR TIPO ===== */
+.type-consulta .timeline-dot { background: #5b8db8; }
+.type-consulta .event-type-badge { background: #dce9f5; color: #1a4f7a; }
+.type-exame .timeline-dot { background: var(--sage); }
+.type-exame .event-type-badge { background: #dceede; color: var(--sage-dark); }
+.type-vacina .timeline-dot { background: #8b6bbf; }
+.type-vacina .event-type-badge { background: #ede5f8; color: #5030a0; }
+.type-procedimento .timeline-dot { background: var(--terracotta); }
+.type-procedimento .event-type-badge { background: #fce5d8; color: #7a3010; }
+.type-medicacao .timeline-dot { background: var(--gold); }
+.type-medicacao .event-type-badge { background: #fdf1d0; color: #7a5010; }
+.type-pesagem .timeline-dot { background: #5baa8e; }
+.type-pesagem .event-type-badge { background: #d5f0e8; color: #1a5c40; }
+.type-outro .timeline-dot { background: var(--gray-mid); }
+.type-outro .event-type-badge { background: var(--gray-lighter); color: var(--charcoal); }
+
+/* ===== HISTÓRICO DE PESO ===== */
+#weight-view {}
+.weight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.weight-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--sage-dark);
+}
+.weight-chart-wrap {
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.weight-chart-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-mid);
+  margin-bottom: 16px;
+}
+#weight-canvas { width: 100%; height: 200px; }
+.weight-table-wrap {
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.weight-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.weight-table th {
+  background: var(--gray-lighter);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray-mid);
+  text-align: left;
+}
+.weight-table td {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--gray-lighter);
+}
+.weight-table tr:hover td { background: var(--cream); }
+
+/* ===== GERENCIAR PETS ===== */
+#pets-view {}
+.pets-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.pets-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--sage-dark);
+}
+.pets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.pet-card {
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+.pet-card:hover { box-shadow: var(--shadow-md); border-color: var(--sage-light); }
+.pet-card-top {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.pet-card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gray-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid var(--sage-light);
+}
+.pet-card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pet-card-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.pet-card-sub { font-size: 0.82rem; color: var(--gray-mid); }
+.pet-card-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* ===== BACKUP ===== */
+#backup-view {}
+.backup-section {
+  background: var(--warm-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.backup-section h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--sage-dark);
+  margin-bottom: 8px;
+}
+.backup-section p {
+  font-size: 0.88rem;
+  color: var(--gray-mid);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.backup-section .warning-box {
+  background: #fef9e7;
+  border: 1.5px solid var(--gold-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #7a5c10;
+  margin-bottom: 16px;
+}
+#import-drop-zone {
+  border: 2px dashed var(--sage-light);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+  color: var(--gray-mid);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+#import-drop-zone:hover, #import-drop-zone.drag-over {
+  border-color: var(--sage);
+  background: #f0f6f1;
+}
+#import-drop-zone .drop-icon { font-size: 2rem; margin-bottom: 8px; }
+
+/* ===== MODAL ===== */
+#modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+#modal-overlay.open { display: flex; }
+.modal {
+  background: var(--warm-white);
+  border-radius: var(--radius);
+  padding: 28px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.2s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--sage-dark);
+}
+.modal-close {
+  background: var(--gray-lighter);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: var(--gray-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--gray-light); color: var(--charcoal); }
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray-mid);
+  margin-bottom: 6px;
+}
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-size: 0.92rem;
+  transition: var(--transition);
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--sage);
+  background: var(--warm-white);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-note { font-size: 0.78rem; color: var(--gray-mid); margin-top: 4px; }
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--gray-lighter);
+}
+
+/* ===== ANEXOS NO FORM ===== */
+.attachments-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.attachment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+.attachment-item .attach-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.attachment-item .attach-remove {
+  background: none;
+  border: none;
+  color: var(--red);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.file-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--cream);
+  border: 1.5px dashed var(--sage-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--sage-dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.file-upload-btn:hover { background: #f0f6f1; border-color: var(--sage); }
+
+/* ===== CONFIRM DIALOG ===== */
+#confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#confirm-overlay.open { display: flex; }
+.confirm-dialog {
+  background: var(--warm-white);
+  border-radius: var(--radius);
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: slideUp 0.18s ease;
+}
+.confirm-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.confirm-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--charcoal); margin-bottom: 8px; }
+.confirm-msg { font-size: 0.88rem; color: var(--gray-mid); margin-bottom: 22px; }
+.confirm-actions { display: flex; gap: 10px; justify-content: center; }
+
+/* ===== VISUALIZADOR DE ARQUIVO ===== */
+#file-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+#file-viewer-overlay.open { display: flex; }
+#file-viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 900px;
+}
+#file-viewer-name {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#file-viewer-content {
+  width: 100%;
+  max-width: 900px;
+  height: calc(90vh - 80px);
+  background: #fff;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+#file-viewer-content iframe,
+#file-viewer-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none;
+}
+
+/* ===== TOAST ===== */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  background: var(--charcoal);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-md);
+  animation: toastIn 0.2s ease;
+  max-width: 320px;
+}
+.toast.success { background: var(--sage-dark); }
+.toast.error { background: var(--red); }
+@keyframes toastIn { from { transform: translateX(30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ===== LOADING ===== */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.loading-logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--sage-dark);
+}
+.loading-logo span { color: var(--terracotta); }
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--gray-light);
+  border-top-color: var(--sage);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 680px) {
+  .header-inner { flex-wrap: wrap; height: auto; padding: 10px 0; }
+  .logo { font-size: 1.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  #pet-summary-card { flex-direction: column; }
+  .pet-summary-actions { flex-direction: row; flex-wrap: wrap; }
+  .tab-btn { padding: 8px 12px; font-size: 0.82rem; }
+  #timeline::before { left: 16px; }
+  .timeline-dot { left: 6px; }
+  .timeline-item { padding-left: 40px; }
+}
+@media (max-width: 420px) {
+  .header-actions .btn span { display: none; }
+  .modal { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading-screen">
+  <div class="loading-logo">Pet<span>Vita</span></div>
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- App principal -->
+<div id="app" style="display:none">
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo">Pet<span>Vita</span></div>
+      <div class="pet-selector-wrap">
+        <select id="pet-select"><option value="">— Selecione um pet —</option></select>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" id="btn-add-event" onclick="openAddEventModal()">
+          <span>➕</span><span>Adicionar Evento</span>
+        </button>
+        <button class="btn btn-secondary" id="btn-add-pet" onclick="openAddPetModal()">
+          <span>🐾</span><span>Novo Pet</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs de navegação -->
+  <nav id="nav-tabs">
+    <div class="nav-tabs-inner">
+      <button class="tab-btn active" data-tab="timeline-view">📋 Linha do Tempo</button>
+      <button class="tab-btn" data-tab="weight-view">⚖️ Peso</button>
+      <button class="tab-btn" data-tab="pets-view">🐾 Meus Pets</button>
+      <button class="tab-btn" data-tab="backup-view">💾 Backup</button>
+    </div>
+  </nav>
+
+  <!-- Conteúdo -->
+  <main id="main">
+
+    <!-- View: Linha do Tempo -->
+    <div id="timeline-view" class="view active">
+
+      <!-- Estado vazio (sem pets) -->
+      <div id="empty-state" style="display:none">
+        <div class="empty-icon">🐶</div>
+        <h2>Bem-vindo ao PetVita!</h2>
+        <p>Cadastre seu primeiro pet para começar a registrar o histórico de saúde.</p>
+        <button class="btn btn-primary" onclick="openAddPetModal()">🐾 Cadastrar Primeiro Pet</button>
+      </div>
+
+      <!-- Conteúdo quando há pet selecionado -->
+      <div id="timeline-content" style="display:none">
+
+        <!-- Aviso de backup -->
+        <div id="backup-warning">
+          ⚠️ <strong>Atenção:</strong> os dados ficam apenas neste navegador. Faça backups regulares na aba <strong>Backup</strong> para não perder informações.
+        </div>
+
+        <!-- Resumo do pet -->
+        <div id="pet-summary-card">
+          <div class="pet-avatar" id="summary-avatar">🐾</div>
+          <div class="pet-info-main">
+            <div class="pet-name" id="summary-name">—</div>
+            <div class="pet-meta" id="summary-meta"></div>
+            <div class="pet-conditions" id="summary-conditions" style="display:none"></div>
+          </div>
+          <div class="pet-summary-actions">
+            <button class="btn btn-secondary btn-sm" onclick="editCurrentPet()">✏️ Editar Pet</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteCurrentPet()">🗑️ Excluir Pet</button>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div id="filters-bar">
+          <div class="filter-group" style="min-width:180px; flex:2">
+            <span class="filter-label">Buscar</span>
+            <input type="text" class="filter-input" id="filter-text" placeholder="Título, descrição, diagnóstico...">
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Tipo</span>
+            <select class="filter-input" id="filter-type">
+              <option value="">Todos</option>
+              <option value="consulta">Consulta</option>
+              <option value="exame">Exame/Laudo</option>
+              <option value="vacina">Vacina</option>
+              <option value="procedimento">Procedimento/Cirurgia</option>
+              <option value="medicacao">Medicação</option>
+              <option value="pesagem">Pesagem</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Data início</span>
+            <input type="date" class="filter-input" id="filter-date-start">
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Data fim</span>
+            <input type="date" class="filter-input" id="filter-date-end">
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Diagnóstico</span>
+            <input type="text" class="filter-input" id="filter-diagnosis" placeholder="Ex: diabetes...">
+          </div>
+          <div class="filter-group" style="min-width:90px; flex:0">
+            <span class="filter-label">Ordem</span>
+            <select class="filter-input" id="filter-order">
+              <option value="desc">Mais recente</option>
+              <option value="asc">Mais antigo</option>
+            </select>
+          </div>
+          <div class="filter-group" style="justify-content:flex-end; min-width:80px; flex:0">
+            <span class="filter-label">&nbsp;</span>
+            <button class="btn btn-secondary btn-sm filter-reset" onclick="resetFilters()">Limpar</button>
+          </div>
+        </div>
+
+        <!-- Linha do tempo -->
+        <div id="timeline"></div>
+
+      </div>
+    </div>
+
+    <!-- View: Peso -->
+    <div id="weight-view" class="view">
+      <div class="weight-header">
+        <h2>⚖️ Histórico de Peso</h2>
+        <button class="btn btn-primary btn-sm" onclick="openWeightModal()">+ Registrar Pesagem</button>
+      </div>
+      <div class="weight-chart-wrap">
+        <div class="weight-chart-title">Evolução do Peso (kg)</div>
+        <canvas id="weight-canvas"></canvas>
+        <div id="weight-chart-empty" style="text-align:center;color:var(--gray-mid);padding:20px 0;display:none;">
+          Nenhuma pesagem registrada ainda.
+        </div>
+      </div>
+      <div class="weight-table-wrap">
+        <table class="weight-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Peso (kg)</th>
+              <th>Observação</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="weight-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- View: Meus Pets -->
+    <div id="pets-view" class="view">
+      <div class="pets-header">
+        <h2>🐾 Meus Pets</h2>
+        <button class="btn btn-primary" onclick="openAddPetModal()">+ Novo Pet</button>
+      </div>
+      <div class="pets-grid" id="pets-grid"></div>
+    </div>
+
+    <!-- View: Backup -->
+    <div id="backup-view" class="view">
+      <div class="backup-section">
+        <h3>📦 Exportar Backup</h3>
+        <p>Gera um arquivo <code>.petvita-backup</code> contendo todos os seus pets, eventos e laudos anexados. Salve em local seguro (nuvem, HD externo, etc.).</p>
+        <div class="warning-box">
+          ⚠️ Os dados do PetVita ficam <strong>apenas neste navegador</strong> (IndexedDB). Limpar cache ou cookies pode apagá-los permanentemente. Faça backup regularmente!
+        </div>
+        <button class="btn btn-gold" onclick="exportBackup()">💾 Exportar Backup Completo</button>
+      </div>
+      <div class="backup-section">
+        <h3>📂 Importar / Restaurar Backup</h3>
+        <p>Selecione um arquivo <code>.petvita-backup</code> exportado anteriormente. <strong>Atenção:</strong> a importação <u>adiciona</u> os dados ao existente (não apaga o que já está no app).</p>
+        <div id="import-drop-zone" onclick="document.getElementById('import-file-input').click()">
+          <div class="drop-icon">📂</div>
+          <div>Clique ou arraste o arquivo de backup aqui</div>
+          <div style="font-size:0.78rem; margin-top:6px; color:var(--gray-mid)">.petvita-backup</div>
+        </div>
+        <input type="file" id="import-file-input" accept=".petvita-backup,.json" style="display:none" onchange="importBackup(this)">
+      </div>
+      <div class="backup-section" style="background:var(--cream)">
+        <h3>ℹ️ Onde ficam os dados?</h3>
+        <p>
+          Todos os dados (incluindo fotos dos pets e laudos de exames em PDF ou imagem) são armazenados no <strong>IndexedDB</strong> do seu navegador — uma base de dados local, diretamente no seu computador ou celular. Nenhuma informação é enviada para a internet.<br><br>
+          O IndexedDB tem capacidade muito maior que o localStorage e suporta arquivos binários (PDFs, imagens), por isso é usado aqui. Os dados persistem entre sessões, mas podem ser apagados se você limpar o cache do navegador.
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal principal (pets e eventos) -->
+<div id="modal-overlay">
+  <div class="modal" id="main-modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">Modal</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Confirm dialog -->
+<div id="confirm-overlay">
+  <div class="confirm-dialog">
+    <div class="confirm-icon" id="confirm-icon">⚠️</div>
+    <div class="confirm-title" id="confirm-title"></div>
+    <div class="confirm-msg" id="confirm-msg"></div>
+    <div class="confirm-actions">
+      <button class="btn btn-secondary" onclick="confirmResolve(false)">Cancelar</button>
+      <button class="btn btn-danger" id="confirm-ok-btn" onclick="confirmResolve(true)">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Visualizador de arquivo -->
+<div id="file-viewer-overlay">
+  <div id="file-viewer-header">
+    <span id="file-viewer-name">arquivo.pdf</span>
+    <button class="btn btn-secondary btn-sm" id="btn-download-file">⬇️ Baixar</button>
+    <button class="btn btn-secondary btn-sm" onclick="closeFileViewer()">✕ Fechar</button>
+  </div>
+  <div id="file-viewer-content"></div>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<script>
+// ================================================================
+// PETVITA — APLICATIVO DE HISTÓRICO DE SAÚDE DOS PETS
+// Versão 1.0 | 100% offline | IndexedDB | Português do Brasil
+// ================================================================
+
+'use strict';
+
+// ================================================================
+// BANCO DE DADOS (IndexedDB)
+// ================================================================
+
+/** Nome e versão do banco */
+const DB_NAME = 'PetVitaDB';
+const DB_VERSION = 1;
+
+let db; // referência global ao banco
+
+/**
+ * Abre (ou cria) o banco IndexedDB.
+ * Cria as stores necessárias se ainda não existirem.
+ */
+function abrirBanco() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+    req.onupgradeneeded = (e) => {
+      const banco = e.target.result;
+
+      // Store de pets
+      if (!banco.objectStoreNames.contains('pets')) {
+        const petStore = banco.createObjectStore('pets', { keyPath: 'id', autoIncrement: true });
+        petStore.createIndex('nome', 'nome', { unique: false });
+      }
+
+      // Store de eventos / registros da linha do tempo
+      if (!banco.objectStoreNames.contains('eventos')) {
+        const evStore = banco.createObjectStore('eventos', { keyPath: 'id', autoIncrement: true });
+        evStore.createIndex('petId', 'petId', { unique: false });
+        evStore.createIndex('data', 'data', { unique: false });
+      }
+
+      // Store de arquivos (laudos, fotos) — armazenados como ArrayBuffer
+      if (!banco.objectStoreNames.contains('arquivos')) {
+        banco.createObjectStore('arquivos', { keyPath: 'id', autoIncrement: true });
+      }
+    };
+
+    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+/** Auxiliar: operação genérica em uma store */
+function dbOp(store, mode, fn) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([store], mode);
+    const s = tx.objectStore(store);
+    const req = fn(s);
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+/** Auxiliar: obter todos os registros de uma store */
+function dbGetAll(store) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([store], 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+/** Auxiliar: obter registro por índice (ex: todos eventos de um petId) */
+function dbGetByIndex(store, indexName, value) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([store], 'readonly');
+    const idx = tx.objectStore(store).index(indexName);
+    const req = idx.getAll(value);
+    req.onsuccess = (e) => resolve(e.target.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+/** CRUD básico */
+const dbAdd    = (store, obj) => dbOp(store, 'readwrite', s => s.add(obj));
+const dbPut    = (store, obj) => dbOp(store, 'readwrite', s => s.put(obj));
+const dbGet    = (store, id)  => dbOp(store, 'readonly',  s => s.get(id));
+const dbDelete = (store, id)  => dbOp(store, 'readwrite', s => s.delete(id));
+
+
+// ================================================================
+// ESTADO GLOBAL DA APLICAÇÃO
+// ================================================================
+
+const state = {
+  pets: [],           // lista de pets carregada do DB
+  petAtual: null,     // pet selecionado no momento
+  eventos: [],        // eventos do pet atual
+  activeTab: 'timeline-view',
+};
+
+
+// ================================================================
+// INICIALIZAÇÃO
+// ================================================================
+
+async function inicializar() {
+  try {
+    await abrirBanco();
+    await carregarPets();
+    configurarEventos();
+    esconderLoading();
+  } catch (err) {
+    console.error('Erro ao inicializar banco:', err);
+    mostrarToast('Erro ao inicializar o banco de dados. Verifique o console.', 'error');
+    esconderLoading();
+  }
+}
+
+function esconderLoading() {
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+}
+
+/** Configura listeners globais */
+function configurarEventos() {
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => trocarTab(btn.dataset.tab));
+  });
+
+  // Seletor de pet
+  document.getElementById('pet-select').addEventListener('change', async (e) => {
+    const id = parseInt(e.target.value);
+    if (id) {
+      state.petAtual = state.pets.find(p => p.id === id) || null;
+      await carregarEventosPet();
+      renderizarTimelineView();
+      renderizarPesoView();
+    } else {
+      state.petAtual = null;
+      mostrarEstadoVazio();
+    }
+  });
+
+  // Filtros — rerender ao mudar
+  ['filter-text','filter-type','filter-date-start','filter-date-end','filter-diagnosis','filter-order'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', renderizarTimeline);
+    if (el) el.addEventListener('change', renderizarTimeline);
+  });
+
+  // Drag & drop no import
+  const dropZone = document.getElementById('import-drop-zone');
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processarImport(file);
+  });
+}
+
+
+// ================================================================
+// GESTÃO DE PETS
+// ================================================================
+
+/** Carrega todos os pets do banco e atualiza o seletor */
+async function carregarPets() {
+  state.pets = await dbGetAll('pets');
+  atualizarSeletorPets();
+  renderizarGridPets();
+  // Se havia um pet selecionado, manter
+  if (state.petAtual) {
+    const recarregado = state.pets.find(p => p.id === state.petAtual.id);
+    state.petAtual = recarregado || null;
+  }
+  if (!state.petAtual && state.pets.length > 0) {
+    state.petAtual = state.pets[0];
+    document.getElementById('pet-select').value = state.petAtual.id;
+    await carregarEventosPet();
+  }
+  if (state.petAtual) {
+    renderizarTimelineView();
+    renderizarPesoView();
+  } else {
+    mostrarEstadoVazio();
+  }
+}
+
+/** Atualiza o <select> de pets no header */
+function atualizarSeletorPets() {
+  const sel = document.getElementById('pet-select');
+  const valorAtual = state.petAtual ? state.petAtual.id : '';
+  sel.innerHTML = '<option value="">— Selecione um pet —</option>';
+  state.pets.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = `${emojiEspecie(p.especie)} ${p.nome}`;
+    if (p.id === valorAtual) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+/** Renderiza grid de pets na aba "Meus Pets" */
+function renderizarGridPets() {
+  const grid = document.getElementById('pets-grid');
+  if (!state.pets.length) {
+    grid.innerHTML = '<p style="color:var(--gray-mid); grid-column:1/-1; text-align:center; padding:40px 0;">Nenhum pet cadastrado ainda.</p>';
+    return;
+  }
+  grid.innerHTML = state.pets.map(p => `
+    <div class="pet-card">
+      <div class="pet-card-top">
+        <div class="pet-card-avatar" id="avatar-card-${p.id}">${emojiEspecie(p.especie)}</div>
+        <div>
+          <div class="pet-card-name">${esc(p.nome)}</div>
+          <div class="pet-card-sub">${esc(p.especie)} ${p.raca ? '· ' + esc(p.raca) : ''}</div>
+          <div class="pet-card-sub">${calcularIdade(p.dataNascimento)}</div>
+        </div>
+      </div>
+      <div class="pet-card-actions">
+        <button class="btn btn-primary btn-sm" onclick="selecionarPet(${p.id})">Ver Histórico</button>
+        <button class="btn btn-secondary btn-sm" onclick="editarPet(${p.id})">✏️</button>
+        <button class="btn btn-danger btn-sm" onclick="excluirPet(${p.id})">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+  // Carregar fotos nos avatares
+  state.pets.forEach(p => {
+    if (p.fotoArquivoId) carregarFotoAvatar(`avatar-card-${p.id}`, p.fotoArquivoId);
+  });
+}
+
+/** Seleciona um pet pela aba "Meus Pets" e vai para timeline */
+async function selecionarPet(id) {
+  state.petAtual = state.pets.find(p => p.id === id);
+  document.getElementById('pet-select').value = id;
+  await carregarEventosPet();
+  trocarTab('timeline-view');
+  renderizarTimelineView();
+  renderizarPesoView();
+}
+
+/** Abre modal para adicionar novo pet */
+function openAddPetModal(petExistente = null) {
+  const editando = !!petExistente;
+  document.getElementById('modal-title').textContent = editando ? '✏️ Editar Pet' : '🐾 Cadastrar Novo Pet';
+
+  // Estado temporário para foto
+  window._petFotoTemp = null;
+  window._petFotoArquivoId = petExistente?.fotoArquivoId || null;
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">Nome *</label>
+      <input type="text" class="form-input" id="f-nome" value="${esc(petExistente?.nome || '')}" placeholder="Nome do pet">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Espécie *</label>
+        <select class="form-select" id="f-especie">
+          <option value="cão" ${petExistente?.especie==='cão'?'selected':''}>🐶 Cão</option>
+          <option value="gato" ${petExistente?.especie==='gato'?'selected':''}>🐱 Gato</option>
+          <option value="outro" ${petExistente?.especie==='outro'?'selected':''}>🐾 Outro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Raça</label>
+        <input type="text" class="form-input" id="f-raca" value="${esc(petExistente?.raca || '')}" placeholder="Opcional">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Sexo</label>
+        <select class="form-select" id="f-sexo">
+          <option value="" ${!petExistente?.sexo?'selected':''}>Não informado</option>
+          <option value="Macho" ${petExistente?.sexo==='Macho'?'selected':''}>Macho</option>
+          <option value="Fêmea" ${petExistente?.sexo==='Fêmea'?'selected':''}>Fêmea</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-input" id="f-nascimento" value="${petExistente?.dataNascimento || ''}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Peso atual (kg)</label>
+        <input type="number" step="0.01" min="0" class="form-input" id="f-peso" value="${petExistente?.peso || ''}" placeholder="Ex: 8.5">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nº Microchip</label>
+        <input type="text" class="form-input" id="f-chip" value="${esc(petExistente?.microchip || '')}" placeholder="Opcional">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Condições crônicas / Observações gerais</label>
+      <textarea class="form-textarea" id="f-obs" placeholder="Ex: diabetes, hipotireoidismo, alergia a frango...">${esc(petExistente?.observacoes || '')}</textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Foto do Pet</label>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div id="foto-preview" style="width:60px;height:60px;border-radius:50%;background:var(--gray-lighter);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;border:2px solid var(--sage-light);">
+          ${petExistente?.fotoArquivoId ? '<span>🔄</span>' : emojiEspecie(petExistente?.especie || 'outro')}
+        </div>
+        <label class="file-upload-btn" for="f-foto-input">📷 Escolher foto</label>
+        <input type="file" id="f-foto-input" accept="image/*" style="display:none" onchange="previewFoto(this)">
+      </div>
+      <div class="form-note">JPG, PNG, WebP — aparecerá no perfil do pet.</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarPet(${petExistente?.id || 'null'})">
+        ${editando ? '💾 Salvar Alterações' : '✅ Cadastrar Pet'}
+      </button>
+    </div>
+  `;
+
+  // Carregar foto existente no preview
+  if (petExistente?.fotoArquivoId) {
+    carregarFotoAvatar('foto-preview', petExistente.fotoArquivoId);
+  }
+
+  abrirModal();
+}
+
+/** Preview da foto no form */
+async function previewFoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  window._petFotoTemp = file;
+  const url = URL.createObjectURL(file);
+  const preview = document.getElementById('foto-preview');
+  preview.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;">`;
+}
+
+/** Salva (cria ou atualiza) um pet */
+async function salvarPet(id) {
+  const nome = document.getElementById('f-nome').value.trim();
+  if (!nome) { mostrarToast('O nome do pet é obrigatório.', 'error'); return; }
+
+  let fotoArquivoId = window._petFotoArquivoId;
+
+  // Salvar nova foto se foi selecionada
+  if (window._petFotoTemp) {
+    const ab = await lerArquivo(window._petFotoTemp);
+    const arquivoObj = {
+      nome: window._petFotoTemp.name,
+      tipo: window._petFotoTemp.type,
+      dados: ab,
+    };
+    fotoArquivoId = await dbAdd('arquivos', arquivoObj);
+  }
+
+  const pet = {
+    nome,
+    especie: document.getElementById('f-especie').value,
+    raca: document.getElementById('f-raca').value.trim(),
+    sexo: document.getElementById('f-sexo').value,
+    dataNascimento: document.getElementById('f-nascimento').value,
+    peso: parseFloat(document.getElementById('f-peso').value) || null,
+    microchip: document.getElementById('f-chip').value.trim(),
+    observacoes: document.getElementById('f-obs').value.trim(),
+    fotoArquivoId,
+  };
+
+  if (id) {
+    pet.id = id;
+    await dbPut('pets', pet);
+    mostrarToast('Pet atualizado com sucesso! ✅', 'success');
+  } else {
+    await dbAdd('pets', pet);
+    mostrarToast('Pet cadastrado com sucesso! 🐾', 'success');
+  }
+
+  closeModal();
+  await carregarPets();
+  // Se editou o pet atual, recarregar
+  if (state.petAtual && (state.petAtual.id === id || !id)) {
+    if (!id) {
+      // selecionou novo pet: selecionar o último
+      state.petAtual = state.pets[state.pets.length - 1];
+      document.getElementById('pet-select').value = state.petAtual.id;
+    }
+    await carregarEventosPet();
+    renderizarTimelineView();
+    renderizarPesoView();
+  }
+}
+
+/** Editar pet atual */
+function editCurrentPet() { if (state.petAtual) editarPet(state.petAtual.id); }
+function editarPet(id) {
+  const pet = state.pets.find(p => p.id === id);
+  if (pet) openAddPetModal(pet);
+}
+
+/** Excluir pet atual */
+function deleteCurrentPet() { if (state.petAtual) excluirPet(state.petAtual.id); }
+
+async function excluirPet(id) {
+  const pet = state.pets.find(p => p.id === id);
+  const ok = await confirmar(`Excluir ${pet?.nome || 'este pet'}?`, 'Esta ação apagará o pet e TODOS os seus eventos e laudos. Não é reversível.');
+  if (!ok) return;
+
+  // Excluir eventos e arquivos relacionados
+  const eventos = await dbGetByIndex('eventos', 'petId', id);
+  for (const ev of eventos) {
+    if (ev.anexos) {
+      for (const an of ev.anexos) await dbDelete('arquivos', an.arquivoId).catch(() => {});
+    }
+    await dbDelete('eventos', ev.id);
+  }
+  // Excluir foto do pet
+  if (pet?.fotoArquivoId) await dbDelete('arquivos', pet.fotoArquivoId).catch(() => {});
+  await dbDelete('pets', id);
+
+  if (state.petAtual?.id === id) {
+    state.petAtual = null;
+    state.eventos = [];
+  }
+
+  mostrarToast('Pet excluído.', 'success');
+  await carregarPets();
+}
+
+
+// ================================================================
+// GESTÃO DE EVENTOS
+// ================================================================
+
+/** Carrega eventos do pet atual */
+async function carregarEventosPet() {
+  if (!state.petAtual) { state.eventos = []; return; }
+  state.eventos = await dbGetByIndex('eventos', 'petId', state.petAtual.id);
+}
+
+/** Abre modal para adicionar evento */
+function openAddEventModal(eventoExistente = null) {
+  if (!state.petAtual) {
+    mostrarToast('Selecione ou cadastre um pet primeiro.', 'error');
+    return;
+  }
+  const editando = !!eventoExistente;
+  document.getElementById('modal-title').textContent = editando ? '✏️ Editar Evento' : '➕ Novo Evento';
+
+  // Estado temporário para arquivos do form
+  window._anexosTemp = eventoExistente?.anexos ? [...eventoExistente.anexos] : [];
+  window._novosArquivosTemp = []; // { file, nome }
+
+  const tipoVal = eventoExistente?.tipo || 'consulta';
+  const hoje = new Date().toISOString().split('T')[0];
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Data *</label>
+        <input type="date" class="form-input" id="fe-data" value="${eventoExistente?.data || hoje}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo *</label>
+        <select class="form-select" id="fe-tipo">
+          <option value="consulta" ${tipoVal==='consulta'?'selected':''}>🩺 Consulta</option>
+          <option value="exame" ${tipoVal==='exame'?'selected':''}>🔬 Exame/Laudo</option>
+          <option value="vacina" ${tipoVal==='vacina'?'selected':''}>💉 Vacina</option>
+          <option value="procedimento" ${tipoVal==='procedimento'?'selected':''}>🏥 Procedimento/Cirurgia</option>
+          <option value="medicacao" ${tipoVal==='medicacao'?'selected':''}>💊 Medicação</option>
+          <option value="pesagem" ${tipoVal==='pesagem'?'selected':''}>⚖️ Pesagem</option>
+          <option value="outro" ${tipoVal==='outro'?'selected':''}>📝 Outro</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Título / Resumo *</label>
+      <input type="text" class="form-input" id="fe-titulo" value="${esc(eventoExistente?.titulo || '')}" placeholder="Ex: Hemograma completo, Vacina V10, Consulta de rotina...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descrição / Observações</label>
+      <textarea class="form-textarea" id="fe-desc" placeholder="Anotações, resultados importantes, recomendações...">${esc(eventoExistente?.descricao || '')}</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Veterinário responsável</label>
+        <input type="text" class="form-input" id="fe-vet" value="${esc(eventoExistente?.veterinario || '')}" placeholder="Nome do veterinário">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Clínica / Local</label>
+        <input type="text" class="form-input" id="fe-clinica" value="${esc(eventoExistente?.clinica || '')}" placeholder="Nome da clínica ou hospital">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Diagnóstico / Doença associada</label>
+      <input type="text" class="form-input" id="fe-diag" value="${esc(eventoExistente?.diagnostico || '')}" placeholder="Ex: Hipotireoidismo, Dermatite alérgica... (para filtro)">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Peso (se pesagem)</label>
+      <input type="number" step="0.01" min="0" class="form-input" id="fe-peso" value="${eventoExistente?.peso || ''}" placeholder="kg — preencha se for pesagem">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Anexos (laudos, imagens, etc.)</label>
+      <label class="file-upload-btn" for="fe-file-input">📎 Adicionar arquivo(s)</label>
+      <input type="file" id="fe-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff" style="display:none" onchange="adicionarAnexosTemp(this)">
+      <div class="attachments-list" id="anexos-list"></div>
+      <div class="form-note">PDF, JPG, PNG e outros. Você pode adicionar vários arquivos.</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarEvento(${eventoExistente?.id || 'null'})">
+        ${editando ? '💾 Salvar Alterações' : '✅ Salvar Evento'}
+      </button>
+    </div>
+  `;
+
+  renderizarAnexosTemp();
+  abrirModal();
+}
+
+/** Adiciona arquivos ao estado temporário de anexos */
+function adicionarAnexosTemp(input) {
+  const files = Array.from(input.files);
+  files.forEach(f => window._novosArquivosTemp.push({ file: f, nome: f.name }));
+  renderizarAnexosTemp();
+  input.value = '';
+}
+
+/** Renderiza a lista de anexos no formulário */
+function renderizarAnexosTemp() {
+  const lista = document.getElementById('anexos-list');
+  if (!lista) return;
+  const itens = [
+    // Anexos já salvos
+    ...window._anexosTemp.map((a, i) => `
+      <div class="attachment-item">
+        <span>${tipoIcone(a.nomeArquivo)}</span>
+        <span class="attach-name">${esc(a.nomeArquivo)}</span>
+        <span style="font-size:0.75rem;color:var(--gray-mid)">Salvo</span>
+        <button class="attach-remove" onclick="removerAnexoExistente(${i})" title="Remover">✕</button>
+      </div>
+    `),
+    // Novos arquivos selecionados
+    ...window._novosArquivosTemp.map((a, i) => `
+      <div class="attachment-item">
+        <span>${tipoIcone(a.nome)}</span>
+        <span class="attach-name">${esc(a.nome)}</span>
+        <span style="font-size:0.75rem;color:var(--sage-dark)">Novo</span>
+        <button class="attach-remove" onclick="removerNovoAnexo(${i})" title="Remover">✕</button>
+      </div>
+    `),
+  ];
+  lista.innerHTML = itens.join('') || '<div style="color:var(--gray-mid);font-size:0.83rem;padding:6px 0;">Nenhum arquivo anexado.</div>';
+}
+
+function removerAnexoExistente(i) {
+  window._anexosTemp.splice(i, 1);
+  renderizarAnexosTemp();
+}
+function removerNovoAnexo(i) {
+  window._novosArquivosTemp.splice(i, 1);
+  renderizarAnexosTemp();
+}
+
+/** Salva (cria ou atualiza) um evento */
+async function salvarEvento(id) {
+  const data = document.getElementById('fe-data').value;
+  const titulo = document.getElementById('fe-titulo').value.trim();
+  if (!data) { mostrarToast('A data é obrigatória.', 'error'); return; }
+  if (!titulo) { mostrarToast('O título é obrigatório.', 'error'); return; }
+
+  // Salvar novos arquivos
+  const novosAnexos = [];
+  for (const item of window._novosArquivosTemp) {
+    const ab = await lerArquivo(item.file);
+    const arqId = await dbAdd('arquivos', {
+      nome: item.file.name,
+      tipo: item.file.type || 'application/octet-stream',
+      dados: ab,
+    });
+    novosAnexos.push({ arquivoId: arqId, nomeArquivo: item.file.name, tipoArquivo: item.file.type });
+  }
+
+  const evento = {
+    petId: state.petAtual.id,
+    data,
+    tipo: document.getElementById('fe-tipo').value,
+    titulo,
+    descricao: document.getElementById('fe-desc').value.trim(),
+    veterinario: document.getElementById('fe-vet').value.trim(),
+    clinica: document.getElementById('fe-clinica').value.trim(),
+    diagnostico: document.getElementById('fe-diag').value.trim(),
+    peso: parseFloat(document.getElementById('fe-peso').value) || null,
+    anexos: [...window._anexosTemp, ...novosAnexos],
+    criadoEm: new Date().toISOString(),
+  };
+
+  if (id) {
+    evento.id = id;
+    await dbPut('eventos', evento);
+    mostrarToast('Evento atualizado! ✅', 'success');
+  } else {
+    await dbAdd('eventos', evento);
+    mostrarToast('Evento salvo! 📋', 'success');
+  }
+
+  // Se for pesagem, atualizar peso no pet
+  if (evento.tipo === 'pesagem' && evento.peso) {
+    const petAtualizado = { ...state.petAtual, peso: evento.peso };
+    await dbPut('pets', petAtualizado);
+    state.petAtual = petAtualizado;
+  }
+
+  closeModal();
+  await carregarEventosPet();
+  renderizarTimeline();
+  renderizarPesoView();
+  await carregarPets();
+  renderizarSumarioPet();
+}
+
+/** Excluir evento */
+async function excluirEvento(id) {
+  const ev = state.eventos.find(e => e.id === id);
+  const ok = await confirmar('Excluir este evento?', `"${ev?.titulo || 'Evento'}" e todos os seus anexos serão apagados permanentemente.`);
+  if (!ok) return;
+
+  // Excluir arquivos
+  if (ev?.anexos) {
+    for (const an of ev.anexos) await dbDelete('arquivos', an.arquivoId).catch(() => {});
+  }
+  await dbDelete('eventos', id);
+
+  mostrarToast('Evento excluído.', 'success');
+  await carregarEventosPet();
+  renderizarTimeline();
+  renderizarPesoView();
+}
+
+
+// ================================================================
+// RENDERIZAÇÃO — LINHA DO TEMPO
+// ================================================================
+
+function renderizarTimelineView() {
+  if (!state.petAtual) { mostrarEstadoVazio(); return; }
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('timeline-content').style.display = 'block';
+  renderizarSumarioPet();
+  renderizarTimeline();
+}
+
+function mostrarEstadoVazio() {
+  document.getElementById('empty-state').style.display = 'block';
+  document.getElementById('timeline-content').style.display = 'none';
+}
+
+/** Renderiza o card de resumo do pet */
+function renderizarSumarioPet() {
+  if (!state.petAtual) return;
+  const p = state.petAtual;
+  document.getElementById('summary-name').textContent = p.nome;
+
+  const meta = document.getElementById('summary-meta');
+  const tags = [];
+  tags.push(`<span class="pet-tag pet-tag-species">${emojiEspecie(p.especie)} ${p.especie}</span>`);
+  if (p.raca) tags.push(`<span class="pet-tag pet-tag-breed">${esc(p.raca)}</span>`);
+  if (p.dataNascimento) tags.push(`<span class="pet-tag pet-tag-age">🎂 ${calcularIdade(p.dataNascimento)}</span>`);
+  if (p.peso) tags.push(`<span class="pet-tag pet-tag-weight">⚖️ ${p.peso} kg</span>`);
+  if (p.sexo) tags.push(`<span class="pet-tag" style="background:var(--gray-lighter);color:var(--charcoal)">${p.sexo}</span>`);
+  meta.innerHTML = tags.join('');
+
+  const cond = document.getElementById('summary-conditions');
+  if (p.observacoes) {
+    cond.textContent = p.observacoes;
+    cond.style.display = '';
+  } else {
+    cond.style.display = 'none';
+  }
+
+  // Avatar
+  const av = document.getElementById('summary-avatar');
+  av.innerHTML = emojiEspecie(p.especie);
+  if (p.fotoArquivoId) carregarFotoAvatar('summary-avatar', p.fotoArquivoId);
+}
+
+/** Renderiza a linha do tempo com filtros aplicados */
+function renderizarTimeline() {
+  const container = document.getElementById('timeline');
+  if (!state.petAtual || !container) return;
+
+  // Leitura dos filtros
+  const txtBusca = (document.getElementById('filter-text')?.value || '').toLowerCase().trim();
+  const tipoFiltro = document.getElementById('filter-type')?.value || '';
+  const dataInicio = document.getElementById('filter-date-start')?.value || '';
+  const dataFim = document.getElementById('filter-date-end')?.value || '';
+  const diagFiltro = (document.getElementById('filter-diagnosis')?.value || '').toLowerCase().trim();
+  const ordem = document.getElementById('filter-order')?.value || 'desc';
+
+  // Filtrar
+  let eventos = state.eventos.filter(ev => {
+    if (tipoFiltro && ev.tipo !== tipoFiltro) return false;
+    if (dataInicio && ev.data < dataInicio) return false;
+    if (dataFim && ev.data > dataFim) return false;
+    if (diagFiltro && !(ev.diagnostico || '').toLowerCase().includes(diagFiltro)) return false;
+    if (txtBusca) {
+      const texto = `${ev.titulo} ${ev.descricao} ${ev.veterinario} ${ev.clinica} ${ev.diagnostico}`.toLowerCase();
+      if (!texto.includes(txtBusca)) return false;
+    }
+    return true;
+  });
+
+  // Ordenar
+  eventos.sort((a, b) => {
+    const diff = a.data.localeCompare(b.data);
+    return ordem === 'desc' ? -diff : diff;
+  });
+
+  if (!eventos.length) {
+    container.innerHTML = `<div class="timeline-empty"><div class="icon">🔍</div><div>Nenhum evento encontrado.<br><small>Tente remover filtros ou adicione um novo evento.</small></div></div>`;
+    return;
+  }
+
+  container.innerHTML = eventos.map(ev => renderizarItemTimeline(ev)).join('');
+
+  // Carregar avatars de eventos que têm fotos
+  // (não aplicável aqui, mas boa prática manter)
+}
+
+/** Renderiza um item da linha do tempo */
+function renderizarItemTimeline(ev) {
+  const tipoNome = nomeTipo(ev.tipo);
+  const anexosHtml = (ev.anexos && ev.anexos.length)
+    ? `<div class="event-attachments">${ev.anexos.map(a =>
+        `<button class="attachment-btn" onclick="abrirArquivo(${a.arquivoId}, '${esc(a.nomeArquivo)}', '${esc(a.tipoArquivo)}')">${tipoIcone(a.nomeArquivo)} ${esc(a.nomeArquivo)}</button>`
+      ).join('')}</div>`
+    : '';
+
+  const metaHtml = [
+    ev.veterinario ? `<span>👨‍⚕️ ${esc(ev.veterinario)}</span>` : '',
+    ev.clinica ? `<span>🏥 ${esc(ev.clinica)}</span>` : '',
+    ev.peso ? `<span>⚖️ ${ev.peso} kg</span>` : '',
+  ].filter(Boolean).join('');
+
+  return `
+  <div class="timeline-item type-${ev.tipo}">
+    <div class="timeline-dot"></div>
+    <div class="timeline-card">
+      <div class="timeline-card-header">
+        <span class="event-type-badge">${tipoNome}</span>
+        <span class="event-title">${esc(ev.titulo)}</span>
+        <span class="event-date">${formatarData(ev.data)}</span>
+      </div>
+      ${ev.diagnostico ? `<div class="event-diagnosis">⚕ ${esc(ev.diagnostico)}</div>` : ''}
+      ${ev.descricao ? `<div class="event-body">${esc(ev.descricao)}</div>` : ''}
+      ${metaHtml ? `<div class="event-meta">${metaHtml}</div>` : ''}
+      ${anexosHtml}
+      <div class="event-actions">
+        <button class="btn btn-secondary btn-sm" onclick="editarEvento(${ev.id})">✏️ Editar</button>
+        <button class="btn btn-danger btn-sm" onclick="excluirEvento(${ev.id})">🗑️</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function editarEvento(id) {
+  const ev = state.eventos.find(e => e.id === id);
+  if (ev) openAddEventModal(ev);
+}
+
+function resetFilters() {
+  document.getElementById('filter-text').value = '';
+  document.getElementById('filter-type').value = '';
+  document.getElementById('filter-date-start').value = '';
+  document.getElementById('filter-date-end').value = '';
+  document.getElementById('filter-diagnosis').value = '';
+  document.getElementById('filter-order').value = 'desc';
+  renderizarTimeline();
+}
+
+
+// ================================================================
+// RENDERIZAÇÃO — PESO
+// ================================================================
+
+function openWeightModal() {
+  if (!state.petAtual) { mostrarToast('Selecione um pet primeiro.', 'error'); return; }
+  document.getElementById('modal-title').textContent = '⚖️ Registrar Pesagem';
+  const hoje = new Date().toISOString().split('T')[0];
+  document.getElementById('modal-body').innerHTML = `
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Data *</label>
+        <input type="date" class="form-input" id="fw-data" value="${hoje}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Peso (kg) *</label>
+        <input type="number" step="0.01" min="0" class="form-input" id="fw-peso" placeholder="Ex: 8.5" autofocus>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Observação</label>
+      <input type="text" class="form-input" id="fw-obs" placeholder="Opcional">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarPesagem()">✅ Salvar</button>
+    </div>
+  `;
+  abrirModal();
+}
+
+async function salvarPesagem() {
+  const data = document.getElementById('fw-data').value;
+  const peso = parseFloat(document.getElementById('fw-peso').value);
+  if (!data || !peso || isNaN(peso)) { mostrarToast('Preencha data e peso.', 'error'); return; }
+
+  await dbAdd('eventos', {
+    petId: state.petAtual.id,
+    data,
+    tipo: 'pesagem',
+    titulo: `Pesagem: ${peso} kg`,
+    descricao: document.getElementById('fw-obs').value.trim(),
+    veterinario: '',
+    clinica: '',
+    diagnostico: '',
+    peso,
+    anexos: [],
+    criadoEm: new Date().toISOString(),
+  });
+
+  // Atualizar peso atual do pet
+  const petAtualizado = { ...state.petAtual, peso };
+  await dbPut('pets', petAtualizado);
+  state.petAtual = petAtualizado;
+
+  closeModal();
+  mostrarToast('Pesagem registrada! ⚖️', 'success');
+  await carregarEventosPet();
+  renderizarPesoView();
+  await carregarPets();
+}
+
+/** Renderiza a view de histórico de peso */
+function renderizarPesoView() {
+  const tbody = document.getElementById('weight-tbody');
+  const canvas = document.getElementById('weight-canvas');
+  const empty = document.getElementById('weight-chart-empty');
+  if (!tbody) return;
+
+  const pesagens = (state.petAtual ? state.eventos.filter(e => e.tipo === 'pesagem' && e.peso) : [])
+    .sort((a, b) => a.data.localeCompare(b.data));
+
+  // Tabela
+  if (!pesagens.length) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--gray-mid);padding:20px;">Nenhuma pesagem registrada.</td></tr>';
+  } else {
+    tbody.innerHTML = pesagens.slice().reverse().map(ev => `
+      <tr>
+        <td>${formatarData(ev.data)}</td>
+        <td><strong>${ev.peso} kg</strong></td>
+        <td>${esc(ev.descricao || '—')}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="excluirEvento(${ev.id})">🗑️</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Gráfico simples com Canvas
+  if (canvas) desenharGraficoPeso(canvas, pesagens, empty);
+}
+
+/** Desenha gráfico de peso com canvas puro */
+function desenharGraficoPeso(canvas, dados, emptyEl) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 600;
+  const H = 200;
+  canvas.width = W;
+  canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+
+  if (!dados.length) {
+    if (emptyEl) { emptyEl.style.display = ''; canvas.style.display = 'none'; }
+    return;
+  }
+  if (emptyEl) emptyEl.style.display = 'none';
+  canvas.style.display = '';
+
+  const pad = { top: 20, right: 24, bottom: 40, left: 50 };
+  const pw = W - pad.left - pad.right;
+  const ph = H - pad.top - pad.bottom;
+
+  const pesos = dados.map(d => d.peso);
+  const minP = Math.max(0, Math.min(...pesos) - 1);
+  const maxP = Math.max(...pesos) + 1;
+  const datas = dados.map(d => d.data);
+
+  // Grid
+  ctx.strokeStyle = '#e8e2d9';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + ph - (i / 4) * ph;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + pw, y); ctx.stroke();
+    const label = (minP + (i / 4) * (maxP - minP)).toFixed(1);
+    ctx.fillStyle = '#7a7a7a'; ctx.font = '11px DM Sans, sans-serif';
+    ctx.textAlign = 'right'; ctx.fillText(label, pad.left - 6, y + 4);
+  }
+
+  // Linha
+  ctx.beginPath();
+  ctx.strokeStyle = '#7a9e7e';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  dados.forEach((d, i) => {
+    const x = pad.left + (i / Math.max(dados.length - 1, 1)) * pw;
+    const y = pad.top + ph - ((d.peso - minP) / (maxP - minP)) * ph;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Preenchimento sob a linha
+  ctx.lineTo(pad.left + pw, pad.top + ph);
+  ctx.lineTo(pad.left, pad.top + ph);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(122,158,126,0.12)';
+  ctx.fill();
+
+  // Pontos e datas
+  dados.forEach((d, i) => {
+    const x = pad.left + (i / Math.max(dados.length - 1, 1)) * pw;
+    const y = pad.top + ph - ((d.peso - minP) / (maxP - minP)) * ph;
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#7a9e7e'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+
+    // Data abaixo
+    ctx.fillStyle = '#7a7a7a'; ctx.font = '10px DM Sans, sans-serif';
+    ctx.textAlign = 'center';
+    const partes = d.data.split('-');
+    ctx.fillText(`${partes[2]}/${partes[1]}`, x, H - pad.bottom + 14);
+  });
+}
+
+
+// ================================================================
+// VISUALIZADOR DE ARQUIVOS
+// ================================================================
+
+async function abrirArquivo(arquivoId, nome, tipo) {
+  try {
+    const arq = await dbGet('arquivos', arquivoId);
+    if (!arq) { mostrarToast('Arquivo não encontrado.', 'error'); return; }
+
+    const nomeArquivo = nome || arq.nome || 'arquivo';
+    const tipoReal = arq.tipo || tipo || 'application/octet-stream';
+    const blob = new Blob([arq.dados], { type: tipoReal });
+
+    // Guarda referência global para o botão de download/compartilhar
+    window._arquivoAberto = { blob, nome: nomeArquivo, tipo: tipoReal };
+
+    document.getElementById('file-viewer-name').textContent = nomeArquivo;
+    const content = document.getElementById('file-viewer-content');
+    content.innerHTML = '';
+
+    if (tipoReal.startsWith('image/')) {
+      // Imagens: renderiza diretamente com object URL — funciona em todos os casos
+      const url = URL.createObjectURL(blob);
+      const img = document.createElement('img');
+      img.src = url;
+      img.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#fff;';
+      content.appendChild(img);
+
+    } else {
+      // PDF e outros: converte para base64 e abre em nova aba
+      // Isso contorna o bloqueio de blob: URLs em iframes no Android PWA
+      const base64 = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result); // já vem como data:...;base64,...
+        reader.readAsDataURL(blob);
+      });
+
+      // Mostra mensagem dentro do visualizador com botão para abrir
+      content.innerHTML = `
+        <div style="
+          display:flex; flex-direction:column; align-items:center; justify-content:center;
+          height:100%; background:#f5f5f5; gap:16px; padding:30px; text-align:center;
+        ">
+          <div style="font-size:4rem;">📄</div>
+          <div style="font-size:1rem; font-weight:600; color:#2c2c2c;">\${esc(nomeArquivo)}</div>
+          <div style="font-size:0.85rem; color:#7a7a7a; max-width:260px; line-height:1.5;">
+            No Android, PDFs abrem no visualizador do sistema.<br>
+            Toque em <strong>Abrir PDF</strong> para visualizar.
+          </div>
+          <button onclick="abrirPDFNoAndroid()" style="
+            background:#4e7352; color:#fff; border:none; border-radius:12px;
+            padding:14px 28px; font-size:1rem; font-weight:600; cursor:pointer;
+            font-family:inherit; width:100%; max-width:260px;
+          ">📄 Abrir PDF</button>
+          <button onclick="baixarArquivoAndroid()" style="
+            background:#fff; color:#4e7352; border:2px solid #4e7352; border-radius:12px;
+            padding:12px 28px; font-size:0.95rem; font-weight:600; cursor:pointer;
+            font-family:inherit; width:100%; max-width:260px;
+          ">⬇️ Baixar / Compartilhar</button>
+        </div>
+      `;
+
+      // Salva o base64 para uso pelos botões
+      window._arquivoAberto.base64 = base64;
+    }
+
+    document.getElementById('file-viewer-overlay').classList.add('open');
+
+    // Botão de download/compartilhar no header
+    document.getElementById('btn-download-file').onclick = () => baixarArquivoAndroid();
+
+  } catch (err) {
+    mostrarToast('Erro ao abrir arquivo: ' + err.message, 'error');
+    console.error(err);
+  }
+}
+
+/** Abre PDF em nova aba usando data URI (funciona no Android) */
+function abrirPDFNoAndroid() {
+  if (!window._arquivoAberto?.base64) return;
+  try {
+    const nova = window.open();
+    if (nova) {
+      nova.document.write(`
+        <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width">
+        <title>\${window._arquivoAberto.nome}</title></head>
+        <body style="margin:0;padding:0;background:#525659;">
+        <embed src="\${window._arquivoAberto.base64}"
+               type="application/pdf"
+               width="100%" height="100%"
+               style="position:fixed;inset:0;width:100%;height:100%;">
+        </body></html>
+      `);
+      nova.document.close();
+    } else {
+      // Popup bloqueado — fallback: download direto
+      baixarArquivoAndroid();
+    }
+  } catch(e) {
+    baixarArquivoAndroid();
+  }
+}
+
+/** Baixa ou compartilha arquivo — usa Web Share API se disponível (Android nativo) */
+async function baixarArquivoAndroid() {
+  if (!window._arquivoAberto) return;
+  const { blob, nome } = window._arquivoAberto;
+
+  // Web Share API com arquivos — disponível no Chrome Android
+  if (navigator.canShare && navigator.canShare({ files: [new File([blob], nome, { type: blob.type })] })) {
+    try {
+      await navigator.share({
+        files: [new File([blob], nome, { type: blob.type })],
+        title: nome,
+      });
+      return;
+    } catch(e) {
+      // Usuário cancelou ou erro — tenta download convencional
+    }
+  }
+
+  // Fallback: download via <a> (funciona no desktop e alguns Androids)
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nome;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 3000);
+  } catch(e) {
+    mostrarToast('Não foi possível baixar. Tente compartilhar.', 'error');
+  }
+}
+
+function closeFileViewer() {
+  document.getElementById('file-viewer-overlay').classList.remove('open');
+  document.getElementById('file-viewer-content').innerHTML = '';
+  window._arquivoAberto = null;
+}
+
+
+// ================================================================
+// BACKUP E RESTAURAÇÃO
+// ================================================================
+
+/** Exporta todos os dados como arquivo JSON */
+async function exportBackup() {
+  try {
+    mostrarToast('Gerando backup...', '');
+    const pets = await dbGetAll('pets');
+    const eventos = await dbGetAll('eventos');
+    const arquivos = await dbGetAll('arquivos');
+
+    // Converter ArrayBuffers para base64 para serialização JSON
+    const arquivosSerializados = arquivos.map(a => ({
+      ...a,
+      dados: arrayBufferParaBase64(a.dados),
+    }));
+
+    const backup = {
+      versao: 1,
+      exportadoEm: new Date().toISOString(),
+      pets,
+      eventos,
+      arquivos: arquivosSerializados,
+    };
+
+    const json = JSON.stringify(backup);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const dataStr = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
+    a.href = url;
+    a.download = `petvita-backup-${dataStr}.petvita-backup`;
+    a.click();
+    URL.revokeObjectURL(url);
+    mostrarToast('Backup exportado com sucesso! 💾', 'success');
+  } catch (err) {
+    mostrarToast('Erro ao exportar backup.', 'error');
+    console.error(err);
+  }
+}
+
+/** Importa backup a partir de input[type=file] */
+function importBackup(input) {
+  const file = input.files[0];
+  if (!file) return;
+  processarImport(file);
+  input.value = '';
+}
+
+async function processarImport(file) {
+  try {
+    const texto = await file.text();
+    const backup = JSON.parse(texto);
+
+    if (!backup.versao || !backup.pets || !backup.eventos || !backup.arquivos) {
+      mostrarToast('Arquivo de backup inválido.', 'error');
+      return;
+    }
+
+    const ok = await confirmar('Importar backup?', `Serão adicionados ${backup.pets.length} pet(s) e ${backup.eventos.length} evento(s). Os dados existentes não serão removidos.`, '📂', 'Importar', 'success');
+    if (!ok) return;
+
+    mostrarToast('Importando...', '');
+
+    // Mapas de IDs antigos → novos (necessário porque o IndexedDB re-autoincrementa)
+    const mapaArquivos = {};
+    const mapaPets = {};
+
+    // Importar arquivos
+    for (const arq of backup.arquivos) {
+      const dadosBin = base64ParaArrayBuffer(arq.dados);
+      const novoId = await dbAdd('arquivos', { nome: arq.nome, tipo: arq.tipo, dados: dadosBin });
+      mapaArquivos[arq.id] = novoId;
+    }
+
+    // Importar pets
+    for (const pet of backup.pets) {
+      const petCopia = { ...pet };
+      delete petCopia.id; // deixar autoincrement criar novo id
+      if (petCopia.fotoArquivoId && mapaArquivos[petCopia.fotoArquivoId]) {
+        petCopia.fotoArquivoId = mapaArquivos[petCopia.fotoArquivoId];
+      }
+      const novoId = await dbAdd('pets', petCopia);
+      mapaPets[pet.id] = novoId;
+    }
+
+    // Importar eventos
+    for (const ev of backup.eventos) {
+      const evCopia = { ...ev };
+      delete evCopia.id;
+      evCopia.petId = mapaPets[ev.petId] || ev.petId;
+      if (evCopia.anexos) {
+        evCopia.anexos = evCopia.anexos.map(a => ({
+          ...a,
+          arquivoId: mapaArquivos[a.arquivoId] || a.arquivoId,
+        }));
+      }
+      await dbAdd('eventos', evCopia);
+    }
+
+    mostrarToast(`Backup importado! ${backup.pets.length} pet(s) adicionado(s). ✅`, 'success');
+    await carregarPets();
+  } catch (err) {
+    mostrarToast('Erro ao importar backup: ' + err.message, 'error');
+    console.error(err);
+  }
+}
+
+
+// ================================================================
+// TABS
+// ================================================================
+
+function trocarTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === tab));
+  state.activeTab = tab;
+  // Rerender se necessário
+  if (tab === 'weight-view') renderizarPesoView();
+  if (tab === 'pets-view') renderizarGridPets();
+}
+
+
+// ================================================================
+// MODAL
+// ================================================================
+
+function abrirModal() { document.getElementById('modal-overlay').classList.add('open'); }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+// Fechar modal clicando fora
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ESC fecha modal e visualizador
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeFileViewer();
+    confirmResolve(false);
+  }
+});
+
+
+// ================================================================
+// CONFIRM DIALOG
+// ================================================================
+
+let _confirmResolve = null;
+
+function confirmar(titulo, msg, icone = '⚠️', btnLabel = 'Confirmar') {
+  return new Promise(resolve => {
+    _confirmResolve = resolve;
+    document.getElementById('confirm-icon').textContent = icone;
+    document.getElementById('confirm-title').textContent = titulo;
+    document.getElementById('confirm-msg').textContent = msg;
+    document.getElementById('confirm-ok-btn').textContent = btnLabel;
+    document.getElementById('confirm-overlay').classList.add('open');
+  });
+}
+
+function confirmResolve(val) {
+  document.getElementById('confirm-overlay').classList.remove('open');
+  if (_confirmResolve) { _confirmResolve(val); _confirmResolve = null; }
+}
+
+
+// ================================================================
+// TOAST
+// ================================================================
+
+function mostrarToast(msg, tipo = '') {
+  const container = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = `toast ${tipo}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+
+// ================================================================
+// UTILITÁRIOS
+// ================================================================
+
+/** Escape HTML básico */
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/** Formata data ISO (YYYY-MM-DD) para dd/mm/aaaa */
+function formatarData(iso) {
+  if (!iso) return '—';
+  const [y, m, d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+/** Calcula idade em anos/meses */
+function calcularIdade(iso) {
+  if (!iso) return 'Idade não informada';
+  const nasc = new Date(iso + 'T00:00:00');
+  const hoje = new Date();
+  let anos = hoje.getFullYear() - nasc.getFullYear();
+  let meses = hoje.getMonth() - nasc.getMonth();
+  if (hoje.getDate() < nasc.getDate()) meses--;
+  if (meses < 0) { anos--; meses += 12; }
+  if (anos < 0) return 'Data inválida';
+  if (anos === 0) return `${meses} mes${meses !== 1 ? 'es' : ''}`;
+  if (meses === 0) return `${anos} ano${anos !== 1 ? 's' : ''}`;
+  return `${anos}a ${meses}m`;
+}
+
+/** Emoji por espécie */
+function emojiEspecie(esp) {
+  if (!esp) return '🐾';
+  if (esp === 'cão') return '🐶';
+  if (esp === 'gato') return '🐱';
+  return '🐾';
+}
+
+/** Nome amigável do tipo de evento */
+function nomeTipo(tipo) {
+  const nomes = {
+    consulta: '🩺 Consulta', exame: '🔬 Exame/Laudo', vacina: '💉 Vacina',
+    procedimento: '🏥 Procedimento', medicacao: '💊 Medicação', pesagem: '⚖️ Pesagem', outro: '📝 Outro',
+  };
+  return nomes[tipo] || tipo;
+}
+
+/** Ícone por tipo de arquivo */
+function tipoIcone(nome) {
+  if (!nome) return '📎';
+  const ext = nome.split('.').pop().toLowerCase();
+  if (ext === 'pdf') return '📄';
+  if (['jpg','jpeg','png','webp','gif','bmp'].includes(ext)) return '🖼️';
+  return '📎';
+}
+
+/** Lê arquivo como ArrayBuffer */
+function lerArquivo(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+/** Carrega foto de um pet num elemento */
+async function carregarFotoAvatar(elementId, arquivoId) {
+  try {
+    const arq = await dbGet('arquivos', arquivoId);
+    if (!arq) return;
+    const blob = new Blob([arq.dados], { type: arq.tipo });
+    const url = URL.createObjectURL(blob);
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" alt="Foto do pet">`;
+  } catch (e) { /* silencioso */ }
+}
+
+/** ArrayBuffer → base64 */
+function arrayBufferParaBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
+/** base64 → ArrayBuffer */
+function base64ParaArrayBuffer(base64) {
+  const binary = atob(base64);
+  const buffer = new ArrayBuffer(binary.length);
+  const view = new Uint8Array(buffer);
+  for (let i = 0; i < binary.length; i++) view[i] = binary.charCodeAt(i);
+  return buffer;
+}
+
+
+// ================================================================
+// INICIALIZAR
+// ================================================================
+inicializar();
+</script>
+</body>
+</html>
+<script>
+// ================================================================
+// PWA — LIMPEZA DE SERVICE WORKER + BANNER DE INSTALAÇÃO
+// ================================================================
+
+/**
+ * IMPORTANTE: Esta versão NÃO usa Service Worker.
+ * Service Workers causavam travamento no carregamento.
+ * Aqui desregistramos qualquer SW antigo e limpamos os caches,
+ * garantindo que o app sempre carregue a versão mais recente.
+ * O app continua funcionando offline graças ao IndexedDB e ao
+ * cache padrão do navegador.
+ */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registros) => {
+    for (const reg of registros) {
+      reg.unregister();
+      console.log('[PetVita] Service Worker antigo removido.');
+    }
+  }).catch(() => {});
+
+  // Limpar todos os caches antigos do PetVita
+  if (window.caches && caches.keys) {
+    caches.keys().then((nomes) => {
+      nomes.forEach((nome) => caches.delete(nome));
+    }).catch(() => {});
+  }
+}
+
+/**
+ * Banner de instalação do PWA ("Adicionar à tela inicial").
+ * Funciona mesmo sem Service Worker em muitos navegadores;
+ * caso não dispare, o usuário ainda pode instalar manualmente
+ * pelo menu do Chrome (Adicionar à tela inicial).
+ */
+let _promptInstalacao = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  _promptInstalacao = e;
+  exibirBannerInstalacao();
+});
+
+function exibirBannerInstalacao() {
+  if (window.matchMedia('(display-mode: standalone)').matches) return;
+  if (sessionStorage.getItem('pwa-banner-dispensado')) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'pwa-install-banner';
+  banner.style.cssText = `
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #2c2c2c; color: #fff; border-radius: 12px;
+    padding: 12px 18px; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3); z-index: 9990;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    max-width: calc(100vw - 40px); animation: toastIn 0.3s ease;
+  `;
+  banner.innerHTML = `
+    <span>🐾</span>
+    <span>Instale o PetVita na sua tela inicial!</span>
+    <button onclick="instalarPWA()" style="
+      background:#7a9e7e; color:#fff; border:none; border-radius:8px;
+      padding:6px 14px; font-size:0.85rem; font-weight:600; cursor:pointer;
+      font-family:inherit; white-space:nowrap;
+    ">Instalar</button>
+    <button onclick="dispensarBannerPWA()" style="
+      background:none; color:#aaa; border:none; font-size:1.1rem;
+      cursor:pointer; padding:0 4px; line-height:1;
+    ">✕</button>
+  `;
+  document.body.appendChild(banner);
+}
+
+async function instalarPWA() {
+  if (!_promptInstalacao) return;
+  _promptInstalacao.prompt();
+  const resultado = await _promptInstalacao.userChoice;
+  if (resultado.outcome === 'accepted') {
+    mostrarToast('PetVita instalado com sucesso! 🎉', 'success');
+  }
+  _promptInstalacao = null;
+  dispensarBannerPWA();
+}
+
+function dispensarBannerPWA() {
+  sessionStorage.setItem('pwa-banner-dispensado', '1');
+  const banner = document.getElementById('pwa-install-banner');
+  if (banner) banner.remove();
+}
+
+window.addEventListener('appinstalled', () => {
+  mostrarToast('PetVita adicionado à tela inicial! 📱', 'success');
+  dispensarBannerPWA();
+});
+</script>
